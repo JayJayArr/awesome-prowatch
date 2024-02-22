@@ -1,0 +1,1 @@
+sqlcmd -s localhost\PWNT -d PWNT -Q "EXEC Disable_Visitor"

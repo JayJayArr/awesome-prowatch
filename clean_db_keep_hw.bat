@@ -1,0 +1,9 @@
+
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "DELETE FROM BADGE"
+
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE EV_LOG"
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE AUDIT_LOG"
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE EV_LOG_DISP"
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE EV_LOG_RESP"
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE EV_LOG_EXT"
+osql -S .\SQLEXPRESS -E -d "pwnt" -Q "TRUNCATE TABLE EXT_EVLOG"

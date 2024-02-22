@@ -1,0 +1,1 @@
+sqlcmd -s localhost\PWNT -Q "UPDATE PWNT.dbo.BADGE_C SET STAT_COD = 'D' WHERE CARDNO IN (SELECT DISTINCT CARDNO FROM PWNT.dbo.EV_LOG WHERE (LOGDEVDESCRP = 'Leser 002.8 Besucher Anlieferung Ausgan' OR LOGDEVDESCRP = '00-01-E-C Empfang Besucher OUT' ) AND CARDNO IS NOT NULL AND CARDNO <> '' AND REC_DAT > dateadd(minute,-5,getdate()))"
