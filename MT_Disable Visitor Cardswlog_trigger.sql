@@ -11,7 +11,7 @@ BEGIN
 DECLARE @CARDSTODISABLE TABLE(cardno nvarchar(32), logdevdescrp nvarchar(80))
 INSERT INTO @CARDSTODISABLE 
 SELECT DISTINCT CARDNO, LOGDEVDESCRP FROM PWNT.dbo.EV_LOG 
-        WHERE (LOGDEVDESCRP = 'Leser 002.8 Besucher Anlieferung Ausgan' OR LOGDEVDESCRP = '00-01-E-C Empfang Besucher OUT' ) 
+        WHERE (LOGDEVDESCRP = 'U2-08-01 Besucher Anlieferung Ausgang' OR LOGDEVDESCRP = '00-01-2 Empfang Besucher OUT' ) 
         AND CARDNO IS NOT NULL AND CARDNO <> '' AND REC_DAT > dateadd(minute,-5,getdate())
 
 DECLARE @count int;
@@ -26,7 +26,7 @@ BEGIN
 		'Badge Deactivated', 
 		(SELECT CARDNO FROM  @CARDSTODISABLE ORDER BY CARDNO OFFSET @i ROWS FETCH NEXT 1 ROWS ONLY), 
 		'Automation', 
-		'VisitorDisable', 
+		'VisitorCardDeleted', 
 		GETDATE(), 
 		9999
 	)
@@ -34,11 +34,10 @@ BEGIN
 
 END
 --Disable Visitor Cards
-UPDATE PWNT.dbo.BADGE_C 
-SET STAT_COD = 'D' 
+DELETE FROM PWNT.dbo.BADGE_C 
 WHERE CARDNO IN (
         SELECT DISTINCT CARDNO FROM PWNT.dbo.EV_LOG 
-        WHERE (LOGDEVDESCRP = 'Leser 002.8 Besucher Anlieferung Ausgan' OR LOGDEVDESCRP = '00-01-E-C Empfang Besucher OUT' ) 
+        WHERE (LOGDEVDESCRP = 'U2-08-01 Besucher Anlieferung Ausgang' OR LOGDEVDESCRP = '00-01-2 Empfang Besucher OUT' ) 
         AND CARDNO IS NOT NULL AND CARDNO <> '' AND REC_DAT > dateadd(minute,-5,getdate())
 )
 END

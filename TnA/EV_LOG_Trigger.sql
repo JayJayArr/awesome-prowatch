@@ -1,4 +1,4 @@
---Creation of a trigger to sync all card changes within ProWatch to a separate Table called "CHANGES" and being assigned a elevator Profile
+--Creation of a trigger to sync all card changes within ProWatch to a separate Table "NUTZTNA"
 
 CREATE TRIGGER dbo.TRG_TNA_collector
         ON dbo.EV_LOG
