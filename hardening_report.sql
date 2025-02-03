@@ -13,6 +13,9 @@ END as [Authentication Mode]
 -- version
 SELECT @@Version
 
+-- open listeners
+SELECT * FROM [sys].[dm_tcp_listener_states]
+
 -- installed databases
 SELECT name as "available Databases" FROM sys.databases
 WHERE name NOT IN ('master', 'model', 'tempdb', 'msdb', 'Resource')
