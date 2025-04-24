@@ -1,2 +1,4 @@
-Update Clear 
-Set Descrp2 = Descrp
+UPDATE
+    Clear
+SET
+    Descrp2 = Descrp

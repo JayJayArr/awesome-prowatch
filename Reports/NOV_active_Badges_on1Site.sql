@@ -1,20 +1,20 @@
-DECLARE 
-    @columns NVARCHAR(MAX) = '',
-    @sql NVARCHAR(MAX) = '';
+DECLARE @columns NVARCHAR(MAX) = '',
+@sql NVARCHAR(MAX) = '';
 
-SELECT 
-    @columns += QUOTENAME(DESCRP) + ','
-FROM 
+SELECT
+    @columns + = QUOTENAME(DESCRP) + ','
+FROM
     CLEAR
-       WHERE DESCRP LIKE 'HUBU%'
-ORDER BY 
+WHERE
+    DESCRP LIKE 'HUBU%'
+ORDER BY
     DESCRP;
 
-SET @columns = LEFT(@columns, LEN(@columns) - 1);
+SET
+    @columns = LEFT(@columns, LEN(@columns) - 1);
 
-
-
-SET @sql = '
+SET
+    @sql = '
 SELECt * FROM (
 
 SELECT LNAME, FNAME, BADGE_C.CARDNO, DESCRP FROM BADGE 
@@ -27,7 +27,7 @@ AND DESCRP LIKE ''HUBU%''
 PIVOT
 (
 COUNT(DESCRP)
-FOR DESCRP IN ('+ @columns +')
+FOR DESCRP IN (' + @columns + ')
 ) AS Pivottable';
 
 EXECUTE sp_executesql @sql;

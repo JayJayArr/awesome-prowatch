@@ -1,13 +1,19 @@
-SELECT 
-  Year(dbo.Audit_Log.DT) as 'Jahr',
-  Month(dbo.Audit_Log.DT) as 'Monat', 
-  COUNT(OPERATION) as 'Karten_hinzugefügt'
-FROM [PWNT].[dbo].[AUDIT_LOG]
-where OPERATION = 1--Karte hinzugefügt
-  and TABLE_NAME = 'BADGE_C'
-  and Year(dbo.Audit_Log.DT) >= '2020'
-  and (
-    WRKST = 'PHCHBS-W31096' --Produktions Büro Stein
-  )
-Group by Year(dbo.Audit_Log.DT),Month(dbo.Audit_Log.DT)
-Order by Year(dbo.Audit_Log.DT),Month(dbo.Audit_Log.DT)
+SELECT
+    Year(dbo.Audit_Log.DT) AS 'Jahr',
+    MONTH(dbo.Audit_Log.DT) AS 'Monat',
+    COUNT(OPERATION) AS 'Karten_hinzugefügt'
+FROM
+    [PWNT].[dbo].[AUDIT_LOG]
+WHERE
+    OPERATION = 1 --Karte hinzugefügt
+    AND TABLE_NAME = 'BADGE_C'
+    AND Year(dbo.Audit_Log.DT) >= '2020'
+    AND (
+        WRKST = 'PHCHBS-W31096' --Produktions Büro Stein
+    )
+GROUP BY
+    Year(dbo.Audit_Log.DT),
+    MONTH(dbo.Audit_Log.DT)
+ORDER BY
+    Year(dbo.Audit_Log.DT),
+    MONTH(dbo.Audit_Log.DT)
