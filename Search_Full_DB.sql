@@ -1,4 +1,5 @@
-DECLARE @SearchStr nvarchar(100)
+DECLARE
+@SearchStr nvarchar(100)
 SET
     @SearchStr = '## YOUR STRING HERE ##' -- Copyright © 2002 Narayana Vyas Kondreddi. All rights reserved.
     -- Purpose: To search all columns of all tables for a given search string
@@ -11,13 +12,16 @@ SET
     -- Date modified: 03rd March 2011 19:00 GMT
     CREATE TABLE #Results (ColumnName nvarchar(370), ColumnValue nvarchar(3630))
 SET
-    NOCOUNT ON DECLARE @TableName nvarchar(256),
-    @ColumnName nvarchar(128),
-    @SearchStr2 nvarchar(110)
+    NOCOUNT ON
+DECLARE
+@TableName nvarchar(256),
+@ColumnName nvarchar(128),
+@SearchStr2 nvarchar(110)
 SET
     @TableName = ''
 SET
-    @SearchStr2 = QUOTENAME('%' + @SearchStr + '%', '''') WHILE @TableName IS NOT NULL BEGIN
+    @SearchStr2 = QUOTENAME('%' + @SearchStr + '%', '''') WHILE @TableName IS NOT NULL
+BEGIN
 SET
     @ColumnName = ''
 SET
@@ -38,7 +42,8 @@ SET
                 'IsMSShipped'
             ) = 0
     ) WHILE (@TableName IS NOT NULL)
-    AND (@ColumnName IS NOT NULL) BEGIN
+    AND (@ColumnName IS NOT NULL)
+BEGIN
 SET
     @ColumnName = (
         SELECT
@@ -57,7 +62,8 @@ SET
                 'decimal'
             )
             AND QUOTENAME(COLUMN_NAME) > @ColumnName
-    ) IF @ColumnName IS NOT NULL BEGIN
+    ) IF @ColumnName IS NOT NULL
+BEGIN
 INSERT INTO
     #Results
     EXEC (

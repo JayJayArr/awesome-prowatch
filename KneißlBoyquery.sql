@@ -1,4 +1,5 @@
-DECLARE @CheckedIn AS int
+DECLARE
+@CheckedIn AS int
 SET
     @CheckedIn = 0
 SELECT
