@@ -1,4 +1,5 @@
-DECLARE @columns NVARCHAR(MAX) = '',
+DECLARE
+@columns NVARCHAR(MAX) = '',
 @sql NVARCHAR(MAX) = '';
 
 SELECT

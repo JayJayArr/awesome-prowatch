@@ -1,4 +1,7 @@
-DECLARE @startTime Datetime DECLARE @endTime Datetime
+DECLARE
+@startTime Datetime
+DECLARE
+@endTime Datetime
 SET
     @startTime = CONVERT(date, getdate() -60)
 SET
@@ -25,8 +28,7 @@ FROM
             INNER JOIN panel ON ev_log.panel_descrp = panel.DESCRP --join panel to get Site
         WHERE
             EVNT_DESCRP LIKE '%Grant%'
-            AND ev_log.EVNT_DAT BETWEEN @startTime
-            AND @endTime
+            AND ev_log.EVNT_DAT BETWEEN @startTime AND @endTime
     ) AS "collectiontable"
 WHERE
     collectiontable.rowID = 1 --get unique valid reads from collectiontable

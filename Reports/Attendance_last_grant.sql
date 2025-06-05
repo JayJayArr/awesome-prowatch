@@ -1,4 +1,5 @@
-DECLARE @UserDateDATE;
+DECLARE
+@UserDateDATE;
 
 SET
     @UserDate = '2024-12-14';
