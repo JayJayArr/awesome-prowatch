@@ -1,7 +1,7 @@
 /**Script to create new cards in a ProWatch System by creating them 
 with bulk badge add and overwriting them 
 with data from a csv inserted into a "translation-table"
-in this case the translation table is called "Import" and contains two Columns: CARDNOOLD & CARDNonEW
+in this case the translation table is called "Import" and contains two Columns: CARDNOOLD & CARDNONEW
 */
 USE PWNT;
 
