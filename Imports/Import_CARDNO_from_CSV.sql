@@ -30,7 +30,6 @@ FROM
     INNER JOIN Import ON BADGE_C.CARDNO = Import.CARDNonEW
     INNER JOIN BADGE_V ON BADGE_V.ID = BADGE_C.ID;
 
-
 /**
 Rename the Badge FirstName to the already imported Cardnumber, unrelated to Import
  */
