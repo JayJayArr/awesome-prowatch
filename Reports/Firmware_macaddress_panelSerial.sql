@@ -1,0 +1,120 @@
+SELECT *
+FROM (
+		SELECT CHANNEL.DESCRP AS [Channel], SITE.DESCRP AS [Site], PANEL.DESCRP AS [Panel Description], PANEL.FIRMWARE_VERSION AS [Panel Firmware],
+    PANEL.LOCATION AS [Location], PANEL.INSTALLED AS [Panel Installed], COALESCE(SPANEL.HWDESCRP, N'') AS [SubPanel Description],
+    SPANEL.FIRMWARE_VERSION AS [SubPanel Firmware], COALESCE(SPANEL_TYPE, N'') AS [SubPanel Type], SPANEL.ADDR AS [SubPanel Address],
+    SPANEL.INSTALLED AS [SubPanel Installed], channel.net_port, channel.MACADDRESS, channel.LASTSERIALNO
+  FROM CHANNEL
+    JOIN SITE ON SITE.ID = CHANNEL.SITE
+    JOIN PANEL ON CHANNEL.ID = PANEL.PPID
+    LEFT JOIN SPANEL ON PANEL.ID = SPANEL.PPID
+  WHERE (
+		(
+			CONVERT(VARBINARY(128), CHANNEL.ID) NOT IN (SELECT fldvalue
+    FROM parti_m)
+    OR
+    (
+				NOT EXISTS ( SELECT id
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434) AND NOT EXISTS ( SELECT id
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21)
+			)
+    OR
+    (
+				(CONVERT(VARBINARY(128), CHANNEL.ID) NOT IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'R') ) )
+    AND
+    (
+					(CONVERT(VARBINARY(128), CHANNEL.ID) IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'G') ) )
+    OR
+    (CONVERT(VARBINARY(128), CHANNEL.ID) IN (SELECT fldvalue
+    FROM parti_m
+    WHERE id IN (SELECT partid
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21) ) )
+				)
+			)
+		)
+
+    AND
+    (
+			CONVERT(VARBINARY(128), PANEL.ID) NOT IN (SELECT fldvalue
+    FROM parti_m)
+    OR
+    (
+				NOT EXISTS ( SELECT id
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434) AND NOT EXISTS ( SELECT id
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21)
+			)
+    OR
+    (
+				(CONVERT(VARBINARY(128), PANEL.ID) NOT IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'R') ) )
+    AND
+    (
+					(CONVERT(VARBINARY(128), PANEL.ID) IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'G') ) )
+    OR
+    (CONVERT(VARBINARY(128), PANEL.ID) IN (SELECT fldvalue
+    FROM parti_m
+    WHERE id IN (SELECT partid
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21) ) )
+				)
+			)
+		)
+
+
+
+    AND
+    (
+			CONVERT(VARBINARY(128), SITE.ID) NOT IN (SELECT fldvalue
+    FROM parti_m)
+    OR
+    (
+				NOT EXISTS ( SELECT id
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434) AND NOT EXISTS ( SELECT id
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21)
+			)
+    OR
+    (
+				(CONVERT(VARBINARY(128), SITE.ID) NOT IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'R') ) )
+    AND
+    (
+					(CONVERT(VARBINARY(128), SITE.ID) IN ( SELECT fldvalue
+    FROM parti_m
+    WHERE id IN ( SELECT partid
+    FROM uid_t
+    WHERE id = 0x003B34304435373739362D433043332D3434 AND gr_flg = 'G') ) )
+    OR
+    (CONVERT(VARBINARY(128), SITE.ID) IN (SELECT fldvalue
+    FROM parti_m
+    WHERE id IN (SELECT partid
+    FROM class_t
+    WHERE id = 0x002FF23F11525A0C11D2AA3A0040051FCE21) ) )
+				)
+			)
+		)
+	) ) AS FIRMWARE
