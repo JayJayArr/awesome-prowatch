@@ -9,6 +9,4 @@ SELECT
     Cast(EVNT_DAT AS date) AS 'Date'
 FROM
     EV_LOG
-    INNER JOIN BADGE_V ON BADGE_V.id = EV_LOG.BADGENO 
-    
--- Runtime Filters in ProWatch: convert(char, EVNT_DAT, 112), convert(char, EVNT_DAT, 112)
+    INNER JOIN BADGE_V ON BADGE_V.id = EV_LOG.BADGENO -- Runtime Filters in ProWatch: convert(char, EVNT_DAT, 112), convert(char, EVNT_DAT, 112)
