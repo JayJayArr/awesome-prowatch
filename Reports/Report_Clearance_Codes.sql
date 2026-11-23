@@ -1,5 +1,14 @@
-select CLEAR.DESCRP 'Clearance Code', LOGICAL_DEV.DESCRP 'Logical Device', TIMECD.DESCRP 'Time Zone'  from CLEAR
-inner join CLEAR_L on CLEAR.ID = CLEAR_L.ID
-inner join LOGICAL_DEV on CLEAR_L.LOGICALDEV_ID = LOGICAL_DEV.ID
-inner join TIMECD on TIMECD.ID = CLEAR_L.TZ_ID
-order by CLEAR.DESCRP, LOGICAL_DEV.DESCRP
+SELECT   CLEAR.DESCRP AS 'Clearance Code',
+         LOGICAL_DEV.DESCRP AS 'Logical Device',
+         TIMECD.DESCRP AS 'Time Zone'
+FROM     CLEAR
+         INNER JOIN
+         CLEAR_L
+         ON CLEAR.ID = CLEAR_L.ID
+         INNER JOIN
+         LOGICAL_DEV
+         ON CLEAR_L.LOGICALDEV_ID = LOGICAL_DEV.ID
+         INNER JOIN
+         TIMECD
+         ON TIMECD.ID = CLEAR_L.TZ_ID
+ORDER BY CLEAR.DESCRP, LOGICAL_DEV.DESCRP;
